@@ -8,6 +8,29 @@ SDL_Event event;
 float x_Axis = 0.0;
 float y_Axis = 0.0;
 
+
+void matrixM();
+void matrixM()
+{
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
+	glm::mat4 view = glm::mat4(1.0f);
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+	glm::mat4 projection;
+	projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
+	int modelLoc = glGetUniformLocation(worldObject::Pragram::square, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+	int viewLoc = glGetUniformLocation(worldObject::Pragram::square, "view");
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+	int projectionLoc = glGetUniformLocation(worldObject::Pragram::square, "projection");
+	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+}
+
 void render::mainLoop()
 {
 	windowAplication::setupSdl();
@@ -54,7 +77,7 @@ void render::mainLoop()
 	};
 
 	pipeline::defineVertex(Data, worldObject::VAO::triangle, Triangle, indices);
-	pipeline::loadTexture("C:/Users/wallyson/Downloads/abc.jpg", GlobalTexture::smileFace);
+	pipeline::loadTexture("C:/Users/wallyson/Downloads/awesomeface.png", GlobalTexture::smileFace);
 	worldObject::Pragram::triangle = pipeline::createGraphicProgram(1);
 
 	pipeline::defineVertex(squareData, worldObject::VAO::square, Square, squareIndices);
@@ -148,10 +171,8 @@ void render::obj()
 	glUseProgram(worldObject::Pragram::square); 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
+	matrixM();
 	// draw 2
-
-
-
 
 	glBindVertexArray(worldObject::VAO::triangle);
 	glUseProgram(worldObject::Pragram::triangle);

@@ -88,6 +88,10 @@ GLuint pipeline::createGraphicProgram(int numberValue)
 		"\n"
 		"uniform float uY;\n"
 		"uniform float uX;\n"
+		"uniform mat4 model;\n"
+		"uniform mat4 view;\n"
+		"uniform mat4 projection;\n"
+		"\n"
 		"\n"
 		"layout (location = 1) in vec3 aPos;\n"
 		"layout (location = 2) in vec3 aCoord;\n"
@@ -96,7 +100,7 @@ GLuint pipeline::createGraphicProgram(int numberValue)
 		"\n"
 		"void main() {\n"
 		"\n"
-		"	gl_Position = vec4(aPos.x+uX, aPos.y+uY, 0.0, 1.0);\n"
+		"	gl_Position = projection * view * model * vec4(aPos.x+uX, aPos.y+uY, 0.0, 1.0);\n"
 		"	coordValue = vec2(aCoord);\n"
 		"}\n"
 	};
@@ -167,7 +171,7 @@ void pipeline::loadTexture(const std::string& file, GLuint& storeIdTexrue)
 	}
 	else
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,	width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, dataImage);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,	width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, dataImage);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
