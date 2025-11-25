@@ -1,0 +1,11 @@
+umderst why my square is not appering
+
+// problem im having - i dont understand why my texture are being used on my two shader
+
+[ ] add texture to the object
+
+[ ] select a obj and change its color
+	do each shader has a id? 
+	how do I swap buffer/frame?
+
+[x] move the obj selected around

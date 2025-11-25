@@ -1,0 +1,26 @@
+# Ignorar arquivos temporários e caches do Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.VC.opendb
+*.ipch/
+*.obj
+*.log
+*.tlog
+*.pdb
+*.db
+*.cache
+*.ilk
+*.exe
+*.dll
+*.lib
+*.idb
+*.sdf
+*.opensdf
+*.unsuccessfulbuild
+x64/
+Debug/
+Release/
